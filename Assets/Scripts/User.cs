@@ -16,7 +16,6 @@ public class User : MonoBehaviour
         SetInfo();
     }
 
-
     void SetInfo()
     {
         nameText.text = name;
