@@ -4,10 +4,8 @@ using TMPro;
 using UnityEngine;
 
 public class User : MonoBehaviour
-{        
-    public string name;
-    public string gsm;
-    public bool isSick;
+{
+    public UserData UserData;
 
     public TextMeshProUGUI nameText;
 
@@ -18,7 +16,7 @@ public class User : MonoBehaviour
 
     void SetInfo()
     {
-        nameText.text = name;
+        nameText.text = UserData.name;
     }
 
 

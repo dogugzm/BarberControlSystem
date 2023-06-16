@@ -11,11 +11,16 @@ public class UserManager : MonoBehaviour
 
     public void DeactivateAll()
     {
+        GeneralPanel.SetActive(false);
         UserCreatePanel.SetActive(false);
         UserSearchPanel.SetActive(false);
     }
 
-
+    public void ActivateMain()
+    {
+        DeactivateAll();
+        GeneralPanel.SetActive(true);
+    }
 
 
 
