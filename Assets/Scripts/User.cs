@@ -16,7 +16,7 @@ public class User : MonoBehaviour
 
     void SetInfo()
     {
-        nameText.text = UserData.name;
+        nameText.text = UserData.isim;
     }
 
 
