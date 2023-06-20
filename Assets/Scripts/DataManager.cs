@@ -12,17 +12,16 @@ public class DataManager : MonoBehaviour
 
     string _json;
     public List<UserData> allUsersFromDB = new List<UserData>();
-    [SerializeField] SearchManager searchManager;
+    public SearchManager searchManager;
 
     private void Start()
     {
         LoadData();
     }
 
-    private void LoadData()
+    public void LoadData()
     {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataRecieved, OnError);
-
     }
 
     private void OnError(PlayFabError obj)
@@ -36,20 +35,25 @@ public class DataManager : MonoBehaviour
 
         if (obj.Data != null && obj.Data.ContainsKey("User List"))
         {
-            allUsersFromDB = JsonConvert.DeserializeObject<List<UserData>>(obj.Data["User List"].Value);   
+            allUsersFromDB = JsonConvert.DeserializeObject<List<UserData>>(obj.Data["User List"].Value);
             //TODO call only if object active.
-            searchManager.SearchButton.onClick.AddListener(delegate { searchManager.CreateListOfAllUsers(allUsersFromDB); });
-
-            Debug.Log(allUsersFromDB[0].isim);
+            UserManager.Instance.allUsers = allUsersFromDB;
+            searchManager.CreateListOfAllUsers(allUsersFromDB);
         }
 
     }
 
     public void SaveUserData()
-    {
-        Debug.Log(UserManager.Instance.GetActiveUserData().isim);
+    {     
         UserManager.Instance.allUsers.Add(UserManager.Instance.GetActiveUserData());      
        _json = JsonConvert.SerializeObject(UserManager.Instance.allUsers);
+        SaveAppearance();
+    }
+
+    public void UpdateUserData()
+    {
+        //UserManager.Instance.allUsers.Add(UserManager.Instance.GetActiveUserData());
+        _json = JsonConvert.SerializeObject(UserManager.Instance.allUsers);
         SaveAppearance();
     }
 
@@ -74,6 +78,8 @@ public class DataManager : MonoBehaviour
     {
         Debug.Log("succesfuly data send");
     }
+
+
 
    
 

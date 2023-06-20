@@ -18,12 +18,13 @@ public class SeansArasý
 
 public class UserManager : MonoBehaviour
 {
-
     public List<UserData> allUsers = new List<UserData>();
 
     public GameObject GeneralPanel;
     public GameObject UserSearchPanel;
     public GameObject UserCreatePanel;
+    public GameObject UserInfoPanel;
+
 
     public TMP_InputField isim;
     public TMP_InputField gsm;
@@ -45,8 +46,6 @@ public class UserManager : MonoBehaviour
             Instance = this;
         }
     }
-
-    
 
     public UserData GetActiveUserData()
     {
@@ -93,6 +92,8 @@ public class UserManager : MonoBehaviour
 
         return newUser;
     }
+
+    
 
     public void DeactivateAll()
     {

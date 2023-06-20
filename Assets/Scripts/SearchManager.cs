@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SearchManager : MonoBehaviour
 {
 
-    public GameObject contentHolder;
+    public Transform contentHolder;
 
     public GameObject[] elements;
 
@@ -16,11 +16,20 @@ public class SearchManager : MonoBehaviour
     public int totalElements;
 
     public GameObject userBarPrefab;
-    public Button SearchButton;
-
+    
 
     private void Start()
     {
+        //CreateListOfAllUsers(dataManager.allUsersFromDB);
+    }
+
+    public void Reload()
+    {
+        foreach (Transform element in contentHolder) 
+        { 
+            Destroy(element.gameObject);
+        
+        }
     }
 
     public void CreateListOfAllUsers(List<UserData> Users)
@@ -31,8 +40,7 @@ public class SearchManager : MonoBehaviour
         for (int i = 0;i < Users.Count;i++) 
         {
             GameObject InstantiatedUser =  Instantiate(userBarPrefab,contentHolder.transform);
-            Debug.Log(InstantiatedUser, InstantiatedUser);
-            InstantiatedUser.GetComponent<TextMeshProUGUI>().text = Users[i].isim;  
+            InstantiatedUser.GetComponent<UserCard>().SetInfo(Users[i]);
         }
         for (int i = 0; i < totalElements; i++) 
         {
@@ -40,8 +48,6 @@ public class SearchManager : MonoBehaviour
         }   
 
     }
-
-
 
     public void Search()
     {
