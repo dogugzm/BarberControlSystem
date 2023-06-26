@@ -8,8 +8,9 @@ public class UserData
     public string isim;
     public string gsm;
     public string tarih;
-    public List<bool[]> seansAralarý = new List<bool[]>(6);
+    public string referans;
+    public List<bool[]> seansAralarý = new List<bool[]>();
     public bool[] týbbiOzgecmis = new bool[5];
-    public List<string[]> seanslar = new List<string[]>(6);
+    public List<string[]> seanslar = new List<string[]>();
 
 }

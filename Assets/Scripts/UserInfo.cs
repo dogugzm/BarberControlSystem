@@ -10,9 +10,15 @@ public class UserInfo : MonoBehaviour
     public TMP_InputField isim;
     public TMP_InputField gsm;
     public TMP_InputField tarih;
+    public TMP_InputField referans;
+
     public List<SeansArasý> seansAralarý = new List<SeansArasý>(6);
     public Toggle[] týbbiOzgecmis = new Toggle[5];
-    public List<Seans> seanslar = new List<Seans>(6);
+    public List<Seans> seanslar = new List<Seans>(7);
+
+    [SerializeField] TextMeshProUGUI totalMoneyText;
+    int totalMoney;
+
 
 
     public void UpdateList()
@@ -25,11 +31,15 @@ public class UserInfo : MonoBehaviour
 
     public void SetActiveUserData(UserData newUser)
     {
-        userData = newUser;    
+        userData = newUser;
+        totalMoney = 0;
+        totalMoneyText.text = "";
         //setting the data
         isim.text = newUser.isim;
         gsm.text = newUser.gsm;
         tarih.text = newUser.tarih;
+        referans.text = newUser.referans;
+
 
         for (int i = 0; i < seansAralarý.Count; i++)
         {
@@ -46,11 +56,22 @@ public class UserInfo : MonoBehaviour
 
         for (int i = 0; i < seanslar.Count; i++)
         {
-            for (int j = 0; j < 6; j++)
+            for (int j = 0; j < 7; j++)
             {
                 seanslar[i].textArray[j].text = newUser.seanslar[i][j];
+                if (j==6)
+                {
+                    int newMoneyToAdd;
+                    int.TryParse(seanslar[i].textArray[j].text, out newMoneyToAdd);
+                    Debug.Log(newMoneyToAdd);
+                    totalMoney += newMoneyToAdd;
+                }
             }
         }
+
+        totalMoneyText.text = "Toplam Ücret : " + totalMoney;
+
+        
 
 
     }
@@ -61,6 +82,8 @@ public class UserInfo : MonoBehaviour
         newUser.isim = isim.text;
         newUser.gsm = gsm.text;
         newUser.tarih = tarih.text;
+        newUser.referans = referans.text;
+
 
         for (int i = 0; i < seansAralarý.Count; i++)
         {
@@ -77,7 +100,7 @@ public class UserInfo : MonoBehaviour
 
         for (int i = 0; i < seanslar.Count; i++)
         {
-            for (int j = 0; j < 6; j++)
+            for (int j = 0; j < 7; j++)
             {
                 newUser.seanslar[i][j] = seanslar[i].textArray[j].text;
             }

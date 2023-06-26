@@ -29,6 +29,8 @@ public class UserManager : MonoBehaviour
     public TMP_InputField isim;
     public TMP_InputField gsm;
     public TMP_InputField tarih;
+    public TMP_InputField referans;
+
     public List<SeansArasý> seansAralarý = new List<SeansArasý>(6);
     public Toggle[] týbbiOzgecmis = new Toggle[5];
     public List<Seans> seanslar = new List<Seans>(6);
@@ -51,7 +53,6 @@ public class UserManager : MonoBehaviour
     {
         UserData newUser = new();
 
-
         //initial empty datas for range error
         for (int i = 0; i < seansAralarý.Count; i++)
         {
@@ -61,13 +62,14 @@ public class UserManager : MonoBehaviour
         //initial empty datas for range error
         for (int i = 0; i < seanslar.Count; i++)
         {
-            newUser.seanslar.Add(new string[6]);
+            newUser.seanslar.Add(new string[7]);
         }
 
         //setting the data
         newUser.isim = isim.text;
         newUser.gsm = gsm.text;
         newUser.tarih = tarih.text;
+        newUser.referans = referans.text;
 
         for (int i = 0; i < seansAralarý.Count; i++)
         {
@@ -84,7 +86,7 @@ public class UserManager : MonoBehaviour
 
         for (int i = 0; i < seanslar.Count; i++)
         {
-            for (int j = 0; j < 6; j++)
+            for (int j = 0; j < 7; j++)
             {
                 newUser.seanslar[i][j] = seanslar[i].textArray[j].text;
             }
