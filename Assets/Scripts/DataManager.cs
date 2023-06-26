@@ -5,11 +5,10 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.PackageManager;
+
 
 public class DataManager : MonoBehaviour
 {
-
     string _json;
     public List<UserData> allUsersFromDB = new List<UserData>();
     public SearchManager searchManager;
@@ -72,18 +71,21 @@ public class DataManager : MonoBehaviour
     private void OnErrorSaving(PlayFabError obj)
     {
         Debug.Log(" data doesnt send");
+        StartCoroutine(CustomDebug.Instance.WrongText("Veri Gönderilemedi Tekrar Deneyiniz"));
     }
 
     private void OnDataSend(UpdateUserDataResult obj)
     {
         Debug.Log("succesfuly data send");
+        StartCoroutine(CustomDebug.Instance.SuccesfulText("Veri Gönderme Baþarýlý"));
+
     }
 
 
 
-   
 
-   
+
+
 
 
 

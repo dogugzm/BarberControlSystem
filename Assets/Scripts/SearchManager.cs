@@ -16,20 +16,42 @@ public class SearchManager : MonoBehaviour
     public int totalElements;
 
     public GameObject userBarPrefab;
-    
 
+    float timer = 3;
+    public bool canClick = true;
+
+    [SerializeField] DataManager dataManager;
+    
     private void Start()
     {
         //CreateListOfAllUsers(dataManager.allUsersFromDB);
     }
 
+    private void Update()
+    {
+        if (timer>0)
+        {
+            timer -= Time.deltaTime;
+            if (timer<=0)
+            {
+                canClick = true;
+            }
+        }
+    }
+
     public void Reload()
     {
-        foreach (Transform element in contentHolder) 
-        { 
-            Destroy(element.gameObject);
-        
+        if (canClick)
+        {
+            canClick = false;
+            timer = 3;
+            foreach (Transform element in contentHolder) 
+            { 
+                Destroy(element.gameObject);
+            }
+            dataManager.LoadData();
         }
+
     }
 
     public void CreateListOfAllUsers(List<UserData> Users)
